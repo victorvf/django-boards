@@ -22,13 +22,13 @@ def sign_up(request):
     else:
         form = SignUpForm()
 
-    return render(request, 'sign_up.html', {'form': form})
+    return render(request, 'accounts/sign_up.html', {'form': form})
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     fields = ('first_name', 'last_name', 'email')
-    template_name = 'my_account.html'
+    template_name = 'accounts/my_account.html'
     success_url = reverse_lazy('my_account')
 
     def get_object(self, queryset=None):

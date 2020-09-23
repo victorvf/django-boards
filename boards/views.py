@@ -14,13 +14,13 @@ from .forms import NewTopicForm, PostForm
 class BoardListView(ListView):
     model = Board
     context_object_name = 'boards'
-    template_name = 'home.html'
+    template_name = 'boards/home.html'
 
 
 class TopicListView(ListView):
     model = Topic
     context_object_name = 'topics'
-    template_name = 'topics.html'
+    template_name = 'boards/topics.html'
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
@@ -60,13 +60,15 @@ def new_topic(request, board_pk):
     else:
         form = NewTopicForm()
 
-    return render(request, 'new_topic.html', {'board': board, 'form': form})
+    return render(
+        request, 'boards/new_topic.html', {'board': board, 'form': form}
+    )
 
 
 class PostListView(ListView):
     model = Post
     context_object_name = 'posts'
-    template_name = 'topic_posts.html'
+    template_name = 'boards/topic_posts.html'
     paginate_by = 3
 
     def get_context_data(self, **kwargs):
@@ -121,13 +123,15 @@ def reply_topic(request, board_pk, topic_pk):
     else:
         form = PostForm()
 
-    return render(request, 'reply_topic.html', {'topic': topic, 'form': form})
+    return render(
+        request, 'boards/reply_topic.html', {'topic': topic, 'form': form}
+    )
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ('message',)
-    template_name = 'edit_post.html'
+    template_name = 'boards/edit_post.html'
 
     """
     Here we get the variable passed by url to use to find the post 

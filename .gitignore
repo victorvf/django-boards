@@ -3,3 +3,5 @@ venv/
 
 settings.ini
 db.sqlite3
+
+__pycache__/
